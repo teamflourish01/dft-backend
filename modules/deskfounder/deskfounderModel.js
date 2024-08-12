@@ -1,0 +1,20 @@
+const mongoose = require("mongoose");
+
+const deskfounderSchema = new mongoose.Schema({
+    Deskfounder_images: 
+    {
+      type: String, // Assuming you'll store image URLs or paths
+      //   required: true,
+    },
+ 
+    Deskfounder_name:{ 
+    type: String,
+    required: true,
+  }
+  
+});
+
+const deskfounderModel = mongoose.model("deskfounder", deskfounderSchema);
+
+module.exports = { deskfounderModel };
+ 
