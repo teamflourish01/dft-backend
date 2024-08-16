@@ -12,12 +12,13 @@ const newsletterrouter = require("./modules/newsletter/newsletter.routes")
 const galleryrouter = require("./modules/gallery/gallery.routes")
 const notablealumnipagesrouter = require("./modules/notableAlumniPages/notableAlumniPages.routes")
 const alumnicommitieerouter = require("./modules/alumnicommitiee/alumnicommitiee.routes")
-const deskfounder = require("./modules/deskfounder/deskfounder.routes")
+const deskfounder = require("./modules/deskfounder/deskfounder.routes");
+const emailtwoRouter = require("./modules/Email/email.routes");
 
 const app = express(); 
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: true }));
 app.use(express.json());
 app.use(express.static("uploads"));
 
@@ -31,6 +32,7 @@ app.use('/' ,galleryrouter);
 app.use('/' ,notablealumnipagesrouter);
 app.use('/' ,alumnicommitieerouter);
 app.use('/' ,deskfounder);
+app.use('/',emailtwoRouter)
 
 // Start the server
 app.listen(process.env.PORT, async () => {

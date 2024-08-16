@@ -4,13 +4,14 @@ const {deskfounderModel } = require('./deskfounderModel');
 
 exports.addDeskfounder = async (req, res) => {
   try {
-    const {Deskfounder_name,filename } = req.body;
+    const {author_name,description,filename } = req.body;
     // const deskfounderFile = req.file.filename;
     const deskfounderFile = req.file ? req.file.filename : null;
 
 
     const Deskfounder = new deskfounderModel({
-        Deskfounder_name, 
+      author_name,
+      description, 
         Deskfounder_images: deskfounderFile,
     }); 
     await Deskfounder.save();
