@@ -1,24 +1,33 @@
 const mongoose = require("mongoose");
-
-const notableAlumniPagesSchema = new mongoose.Schema({
-
-  
-  notableAlumniPages_name:{
-    type: String,
-    // required: true,
+const options = {
+  versionKey: false,
+  timestamps: {
+    createdAt: true,
+    updatedAt: "modifiedAt",
   },
-  notableAlumniPages_designation:{
-    type: String,
-    // required: true,
-  }, 
-  notableAlumniPages_text:{
-    type: String,
-    // required: true,
+};
+
+const notableAlumniPagesSchema = new mongoose.Schema(
+  {
+    notableAlumniPages_name: {
+      type: String,
+      // required: true,
+    },
+    notableAlumniPages_designation: {
+      type: String,
+      // required: true,
+    },
+    notableAlumniPages_text: {
+      type: String,
+      // required: true,
+    },
   },
+  options
+);
 
-
-});
-
-const notableAlumniPagesModel = mongoose.model("notableAlumniPages", notableAlumniPagesSchema);
+const notableAlumniPagesModel = mongoose.model(
+  "notableAlumniPages",
+  notableAlumniPagesSchema
+);
 
 module.exports = { notableAlumniPagesModel };

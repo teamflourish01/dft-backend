@@ -1,7 +1,13 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
-const { addHome, getHome, updateHome, deleteHome } = require("./homeController");
+const {
+  addHome,
+  getHome,
+  updateHome,
+  deleteHome,
+  getHomeDetails,
+} = require("./homeController");
 
 const router = express.Router();
 
@@ -22,7 +28,7 @@ router.post("/homepage/posts", upload.array("Banner_images"), addHome);
 
 // Get all posts
 router.get("/home", getHome);
-
+router.get("/home/:id", getHomeDetails);
 // Update a specific post by ID
 router.put("/homepage/update/:id", upload.array("Banner_images"), updateHome); // Use PUT for updates
 
