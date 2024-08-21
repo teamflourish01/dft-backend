@@ -1,0 +1,3610 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Alumni API",
+      "version": "1.0.0",
+      "description": "API documentation for Alumni project"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8080",
+        "description": "Development server"
+      }
+    ],
+    "paths": {
+      "/about": {
+        "get": {
+          "summary": "Get home page content",
+          "description": "that return about data",
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/about/{id}": {
+        "get": {
+          "summary": "Get detailed About Us content",
+          "description": "Fetch detailed information for the About Us section by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "ID of the About Us section"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/aboutpage/posts": {
+        "post": {
+          "summary": "Add a new About Us entry",
+          "description": "Uploads an image and adds a new entry to the About Us section",
+          "consumes": ["multipart/form-data"],
+          "parameters": [
+            {
+              "name": "About_images",
+              "in": "formData",
+              "required": true,
+              "description": "Image file to be uploaded",
+              "type": "file"
+            },
+            {
+              "name": "About_heading",
+              "in": "formData",
+              "required": true,
+              "description": "Heading for the About Us section",
+              "schema": {
+                "type": "string",
+                "example": "About DFT Alumni"
+              }
+            },
+            {
+              "name": "About_text",
+              "in": "formData",
+              "required": true,
+              "description": "Text for the About Us section",
+              "schema": {
+                "type": "string",
+                "example": "We are a group of professionals..."
+              }
+            },
+            {
+              "name": "Our_mision_heading",
+              "in": "formData",
+              "required": true,
+              "description": "Heading for the mission statement",
+              "schema": {
+                "type": "string",
+                "example": "OUR MISION text"
+              }
+            },
+            {
+              "name": "Our_mision_text",
+              "in": "formData",
+              "required": true,
+              "description": "Text for the mission statement",
+              "schema": {
+                "type": "string",
+                "example": "To create a lifelong and worldwide community..."
+              }
+            },
+            {
+              "name": "Our_vision_heading",
+              "in": "formData",
+              "required": true,
+              "description": "Heading for the vision statement",
+              "schema": {
+                "type": "string",
+                "example": "OUR VISION value"
+              }
+            },
+            {
+              "name": "Our_vision_text",
+              "in": "formData",
+              "required": true,
+              "description": "Text for the vision statement",
+              "schema": {
+                "type": "string",
+                "example": "To promote good will and sense of pride..."
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "New About Us entry created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "New About Us entry created"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "66a39b3be4d509550fdd1c95"
+                          },
+                          "About_images": {
+                            "type": "string",
+                            "example": "1723799674400-about.png"
+                          },
+                          "About_heading": {
+                            "type": "string",
+                            "example": "About DFT Alumni"
+                          },
+                          "About_text": {
+                            "type": "string",
+                            "example": "We are a group of professionals..."
+                          },
+                          "Our_mision_heading": {
+                            "type": "string",
+                            "example": "OUR MISION text"
+                          },
+                          "Our_mision_text": {
+                            "type": "string",
+                            "example": "To create a lifelong and worldwide community..."
+                          },
+                          "Our_vision_heading": {
+                            "type": "string",
+                            "example": "OUR VISION value"
+                          },
+                          "Our_vision_text": {
+                            "type": "string",
+                            "example": "To promote good will and sense of pride..."
+                          },
+                          "__v": {
+                            "type": "integer",
+                            "example": 0
+                          },
+                          "modifiedAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-08-16T09:14:34.430Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/aboutpage/delete/{id}": {
+        "delete": {
+          "summary": "Delete an About Us entry",
+          "description": "Deletes an entry from the About Us section by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the About Us entry to delete"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Entry deleted successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Entry not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/aboutpage/update/{id}": {
+        "put": {
+          "summary": "Update an About Us entry",
+          "description": "Updates an existing entry in the About Us section by ID",
+          "consumes": ["multipart/form-data"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the About Us entry to update"
+            },
+            {
+              "name": "About_images",
+              "in": "formData",
+              "required": false,
+              "description": "Updated image file",
+              "type": "file"
+            },
+            {
+              "name": "About_heading",
+              "in": "formData",
+              "required": false,
+              "description": "Updated heading for the About Us section",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "About_text",
+              "in": "formData",
+              "required": false,
+              "description": "Updated text for the About Us section",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "Our_mision_heading",
+              "in": "formData",
+              "required": false,
+              "description": "Updated heading for the mission statement",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "Our_mision_text",
+              "in": "formData",
+              "required": false,
+              "description": "Updated text for the mission statement",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "Our_vision_heading",
+              "in": "formData",
+              "required": false,
+              "description": "Updated heading for the vision statement",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "Our_vision_text",
+              "in": "formData",
+              "required": false,
+              "description": "Updated text for the vision statement",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Entry updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "About_images": {
+                            "type": "string"
+                          },
+                          "About_heading": {
+                            "type": "string"
+                          },
+                          "About_text": {
+                            "type": "string"
+                          },
+                          "Our_mision_heading": {
+                            "type": "string"
+                          },
+                          "Our_mision_text": {
+                            "type": "string"
+                          },
+                          "Our_vision_heading": {
+                            "type": "string"
+                          },
+                          "Our_vision_text": {
+                            "type": "string"
+                          },
+                          "__v": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "modifiedAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-08-16T09:14:34.430Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Entry not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/alumnicommitiee/posts": {
+        "post": {
+          "summary": "Add a new alumni committee member",
+          "description": "Uploads an image and adds a new alumni committee member",
+          "consumes": ["multipart/form-data"],
+          "parameters": [
+            {
+              "name": "Commitiee_images",
+              "in": "formData",
+              "required": true,
+              "description": "Image file of the committee member",
+              "type": "file"
+            },
+            {
+              "name": "name",
+              "in": "formData",
+              "required": true,
+              "description": "Name of the committee member",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "designation",
+              "in": "formData",
+              "required": true,
+              "description": "Designation of the committee member",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "New alumni committee member added successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "Commitiee_images": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "designation": {
+                            "type": "string"
+                          },
+                          "__v": {
+                            "type": "integer",
+                            "example": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/alumnicommitiee": {
+        "get": {
+          "summary": "Get alumni Commitiee",
+          "description": "that return about data",
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/alumnicommitiee/{id}": {
+        "get": {
+          "summary": "Get detailed alumnicommitiee by id",
+          "description": "Fetch detailed information for the About Us section by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "ID of the About Us section"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/alumnicommitiee/update/{id}": {
+        "put": {
+          "summary": "Update a specific alumni committee member by ID",
+          "description": "Updates an existing alumni committee member by their ID",
+          "consumes": ["multipart/form-data"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the alumni committee member to update"
+            },
+            {
+              "name": "name",
+              "in": "formData",
+              "required": false,
+              "description": "Updated name of the committee member",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "designation",
+              "in": "formData",
+              "required": false,
+              "description": "Updated designation of the committee member",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "Commitiee_images",
+              "in": "formData",
+              "required": false,
+              "description": "Updated image file of the committee member",
+              "type": "file"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Alumni committee member updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "designation": {
+                            "type": "string"
+                          },
+                          "Commitiee_images": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Committee member not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/alumnicommitiee/delete/{id}": {
+        "delete": {
+          "summary": "Delete a specific alumni committee member by ID",
+          "description": "Deletes an existing alumni committee member by their ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the alumni committee member to delete"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Alumni committee member deleted successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Committee member deleted successfully"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Committee member not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Committee member not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/deskfounder/posts": {
+        "post": {
+          "summary": "Create a new Desk Founder post",
+          "description": "Uploads an image and creates a new Desk Founder post",
+          "consumes": ["multipart/form-data"],
+          "parameters": [
+            {
+              "name": "Deskfounder_images",
+              "in": "formData",
+              "required": true,
+              "description": "Image file for the Desk Founder",
+              "type": "file"
+            },
+            {
+              "name": "Deskfounder_title",
+              "in": "formData",
+              "required": true,
+              "description": "Title for the Desk Founder post",
+              "schema": {
+                "type": "string",
+                "example": "Message from the Founder"
+              }
+            },
+            {
+              "name": "Deskfounder_content",
+              "in": "formData",
+              "required": true,
+              "description": "Content of the Desk Founder post",
+              "schema": {
+                "type": "string",
+                "example": "This is the content of the Desk Founder post..."
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Desk Founder post created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "New Desk Founder post created"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "64a8b2c8e5f123456789abcd"
+                          },
+                          "Deskfounder_images": {
+                            "type": "string",
+                            "example": "deskfounder_image.png"
+                          },
+                          "Deskfounder_title": {
+                            "type": "string",
+                            "example": "Message from the Founder"
+                          },
+                          "Deskfounder_content": {
+                            "type": "string",
+                            "example": "This is the content of the Desk Founder post..."
+                          },
+                          "__v": {
+                            "type": "integer",
+                            "example": 0
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-08-20T10:30:00Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/deskfounder": {
+        "get": {
+          "summary": "Retrieve all Desk Founder posts",
+          "description": "Fetches a list of all Desk Founder posts.",
+          "responses": {
+            "200": {
+              "description": "A list of Desk Founder posts",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "64a8b2c8e5f123456789abcd"
+                        },
+                        "Deskfounder_images": {
+                          "type": "string",
+                          "example": "deskfounder_image.png"
+                        },
+                        "Deskfounder_title": {
+                          "type": "string",
+                          "example": "Message from the Founder"
+                        },
+                        "Deskfounder_content": {
+                          "type": "string",
+                          "example": "This is the content of the Desk Founder post..."
+                        },
+                        "__v": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2024-08-20T10:30:00Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/deskfounder/{id}": {
+        "get": {
+          "summary": "Retrieve a single Desk Founder post by ID",
+          "description": "Fetches the details of a specific Desk Founder post using its ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the Desk Founder post to retrieve"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "A single Desk Founder post",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string"
+                      },
+                      "Deskfounder_images": {
+                        "type": "string"
+                      },
+                      "Deskfounder_title": {
+                        "type": "string"
+                      },
+                      "Deskfounder_content": {
+                        "type": "string"
+                      },
+                      "__v": {
+                        "type": "integer",
+                        "example": 0
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-08-20T10:30:00Z"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Post not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/deskfounder/update/{id}": {
+        "put": {
+          "summary": "Update a specific Desk Founder post by ID",
+          "description": "Updates the details of a specific Desk Founder post using its ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the Desk Founder post to update"
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Deskfounder_images": {
+                      "type": "string",
+                      "format": "binary",
+                      "description": "Image file for the Desk Founder post"
+                    },
+                    "Deskfounder_title": {
+                      "type": "string"
+                    },
+                    "Deskfounder_content": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Desk Founder post successfully updated",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      },
+                      "updatedPost": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "Deskfounder_images": {
+                            "type": "string"
+                          },
+                          "Deskfounder_title": {
+                            "type": "string"
+                          },
+                          "Deskfounder_content": {
+                            "type": "string"
+                          },
+                          "__v": {
+                            "type": "integer",
+                            "example": 0
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-08-20T11:00:00Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input or missing required fields",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Invalid data provided"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Post not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Desk Founder post not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/deskfounder/delete/{id}": {
+        "delete": {
+          "summary": "Delete a specific Desk Founder post by ID",
+          "description": "Deletes a Desk Founder post using its ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the Desk Founder post to delete"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Desk Founder post successfully deleted",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Desk Founder post deleted successfully"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Post not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Desk Founder post not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/gallery/posts": {
+        "post": {
+          "summary": "Create a new Gallery post with file upload",
+          "description": "Creates a new Gallery post and allows for multiple image uploads.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Gallery_images": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "format": "binary"
+                      },
+                      "description": "Array of images to be uploaded"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "Title of the Gallery post"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Description of the Gallery post"
+                    }
+                  },
+                  "required": ["Gallery_images", "title"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Gallery post created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      },
+                      "post": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "Gallery_images": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/gallery": {
+        "get": {
+          "summary": "Get all Gallery posts",
+          "description": "Fetches all Gallery posts available in the database.",
+          "responses": {
+            "200": {
+              "description": "Successful retrieval of Gallery posts",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "posts": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "example": "60c72b2f5f3c2c001cb3e9d8"
+                            },
+                            "title": {
+                              "type": "string",
+                              "example": "Summer Vacation"
+                            },
+                            "description": {
+                              "type": "string",
+                              "example": "Photos from our summer vacation"
+                            },
+                            "Gallery_images": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "example": "/uploads/gallery1.jpg"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/gallery/{id}": {
+        "get": {
+          "summary": "Get a single Gallery post by ID",
+          "description": "Fetches a specific Gallery post from the database using its ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "example": "60c72b2f5f3c2c001cb3e9d8"
+              },
+              "description": "ID of the Gallery post to retrieve"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful retrieval of a single Gallery post",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "60c72b2f5f3c2c001cb3e9d8"
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "Summer Vacation"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Photos from our summer vacation"
+                      },
+                      "Gallery_images": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "example": "/uploads/gallery1.jpg"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Gallery post not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Gallery post not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+  
+      "/gallery/update/{id}": {
+        "put": {
+          "summary": "Update a specific Gallery post by ID",
+          "description": "Updates a Gallery post in the database using its ID. Allows updating the title, description, and images.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the Gallery post to update"
+            },
+            {
+              "name": "Gallery_images",
+              "in": "formData",
+              "required": false,
+              "description": "Updated images for the Gallery post. Multiple files can be uploaded.",
+              "type": "array",
+              "items": {
+                "type": "file"
+              }
+            },
+            {
+              "name": "title",
+              "in": "formData",
+              "required": false,
+              "description": "Updated title for the Gallery post",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "description",
+              "in": "formData",
+              "required": false,
+              "description": "Updated description for the Gallery post",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful update of the Gallery post",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "Gallery_images": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Gallery post not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          },
+  
+          "/gallery/delete/{id}": {
+            "delete": {
+              "summary": "Delete a specific Gallery post by ID",
+              "description": "Deletes a Gallery post from the database using its ID.",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  },
+                  "description": "ID of the Gallery post to delete"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Gallery post deleted successfully",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "msg": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "404": {
+                  "description": "Gallery post not found",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "msg": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "500": {
+                  "description": "Internal server error"
+                }
+              }
+            }
+          },
+  
+          "/homepage/posts": {
+            "post": {
+              "summary": "Create a new homepage post",
+              "description": "Uploads images and creates a new post for the homepage.",
+              "consumes": ["multipart/form-data"],
+              "parameters": [
+                {
+                  "name": "Banner_images",
+                  "in": "formData",
+                  "required": true,
+                  "description": "Array of images to be uploaded for the homepage banner",
+                  "type": "array",
+                  "items": {
+                    "type": "file"
+                  }
+                },
+                {
+                  "name": "title",
+                  "in": "formData",
+                  "required": true,
+                  "description": "Title of the homepage post",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "description",
+                  "in": "formData",
+                  "required": true,
+                  "description": "Description of the homepage post",
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              ],
+              "responses": {
+                "201": {
+                  "description": "New homepage post created successfully",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "msg": {
+                            "type": "string"
+                          },
+                          "data": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "Banner_images": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Bad request, possibly due to missing required parameters or invalid data",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "500": {
+                  "description": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/home": {
+        "get": {
+          "summary": "Get all homepage posts",
+          "description": "Retrieves a list of all homepage posts.",
+          "responses": {
+            "200": {
+              "description": "Successfully retrieved list of homepage posts",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "60c72b2f5f3c2c001cb3e9d8"
+                        },
+                        "Banner_images": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Internal server error"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/home/{id}": {
+        "get": {
+          "summary": "Get a single homepage post by ID",
+          "description": "Fetches a single homepage post by its ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the homepage post to retrieve"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully retrieved the homepage post",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "Banner_images": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Homepage post not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Homepage post not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Internal server error"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/homepage/update/{id}": {
+        "put": {
+          "summary": "Update a specific homepage post by ID",
+          "description": "Updates an existing homepage post by its ID. Supports file uploads for updating banner images.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the homepage post to update"
+            },
+            {
+              "name": "Banner_images",
+              "in": "formData",
+              "required": false,
+              "description": "Updated banner image files",
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            {
+              "name": "title",
+              "in": "formData",
+              "required": false,
+              "description": "Updated title of the homepage post",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "description",
+              "in": "formData",
+              "required": false,
+              "description": "Updated description of the homepage post",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Homepage post updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "Banner_images": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request due to invalid input",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Invalid input data"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Homepage post not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Homepage post not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Internal server error"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/homepage/delete/{id}": {
+        "delete": {
+          "summary": "Delete a specific homepage post by ID",
+          "description": "Deletes a homepage post identified by its ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the homepage post to delete"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Homepage post deleted successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Homepage post not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Internal server error"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/newsletter/posts": {
+        "post": {
+          "summary": "Create a new newsletter post with file upload",
+          "description": "Uploads a PDF file and creates a new newsletter post.",
+          "consumes": ["multipart/form-data"],
+          "parameters": [
+            {
+              "name": "Newsletter_pdfs",
+              "in": "formData",
+              "required": true,
+              "description": "PDF file to be uploaded",
+              "type": "file"
+            },
+            {
+              "name": "Title",
+              "in": "formData",
+              "required": true,
+              "description": "Title of the newsletter post",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "Description",
+              "in": "formData",
+              "required": false,
+              "description": "Description of the newsletter post",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Newsletter post created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "Title": {
+                            "type": "string"
+                          },
+                          "Description": {
+                            "type": "string"
+                          },
+                          "Newsletter_pdfs": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-08-20T12:00:00Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request, possibly due to missing required parameters",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/newsletter": {
+        "get": {
+          "summary": "Get all newsletter posts",
+          "description": "Retrieve a list of all newsletter posts.",
+          "responses": {
+            "200": {
+              "description": "Successfully retrieved list of newsletter posts",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "_id": {
+                              "type": "string"
+                            },
+                            "Title": {
+                              "type": "string"
+                            },
+                            "Description": {
+                              "type": "string"
+                            },
+                            "Newsletter_pdfs": {
+                              "type": "string"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-08-20T12:00:00Z"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Internal server error"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+  
+          "/newsletter/{id}": {
+            "get": {
+              "summary": "Get a single newsletter post by ID",
+              "description": "Retrieve a specific newsletter post by its ID.",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  },
+                  "description": "ID of the newsletter post to retrieve"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successfully retrieved the newsletter post",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "msg": {
+                            "type": "string",
+                            "example": "Newsletter post retrieved successfully"
+                          },
+                          "data": {
+                            "type": "object",
+                            "properties": {
+                              "_id": {
+                                "type": "string",
+                                "example": "63b39b2ee4f4e8d04b3e8f3c"
+                              },
+                              "Title": {
+                                "type": "string",
+                                "example": "Monthly Update"
+                              },
+                              "Description": {
+                                "type": "string",
+                                "example": "This month's newsletter includes updates on upcoming events..."
+                              },
+                              "Newsletter_pdfs": {
+                                "type": "string",
+                                "example": "newsletter_august_2024.pdf"
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2024-08-20T12:00:00Z"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "404": {
+                  "description": "Newsletter post not found",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "msg": {
+                            "type": "string",
+                            "example": "Newsletter post not found"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "500": {
+                  "description": "Internal server error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "type": "string",
+                            "example": "Internal server error"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+  
+          "/newsletter/update/{id}": {
+            "put": {
+              "summary": "Update a specific newsletter post by ID",
+              "description": "Updates an existing newsletter post by its ID. You can update the title, description, and upload a new PDF file.",
+              "consumes": ["multipart/form-data"],
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  },
+                  "description": "ID of the newsletter post to update"
+                },
+                {
+                  "name": "Title",
+                  "in": "formData",
+                  "required": false,
+                  "description": "Updated title of the newsletter post",
+                  "schema": {
+                    "type": "string",
+                    "example": "Updated Monthly Update"
+                  }
+                },
+                {
+                  "name": "Description",
+                  "in": "formData",
+                  "required": false,
+                  "description": "Updated description of the newsletter post",
+                  "schema": {
+                    "type": "string",
+                    "example": "This update includes new information on upcoming events..."
+                  }
+                },
+                {
+                  "name": "Newsletter_pdfs",
+                  "in": "formData",
+                  "required": false,
+                  "description": "Updated PDF file for the newsletter post",
+                  "type": "file"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Newsletter post updated successfully",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "msg": {
+                            "type": "string",
+                            "example": "Newsletter post updated successfully"
+                          },
+                          "data": {
+                            "type": "object",
+                            "properties": {
+                              "_id": {
+                                "type": "string",
+                                "example": "63b39b2ee4f4e8d04b3e8f3c"
+                              },
+                              "Title": {
+                                "type": "string",
+                                "example": "Updated Monthly Update"
+                              },
+                              "Description": {
+                                "type": "string",
+                                "example": "This update includes new information on upcoming events..."
+                              },
+                              "Newsletter_pdfs": {
+                                "type": "string",
+                                "example": "updated_newsletter_august_2024.pdf"
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2024-08-20T12:00:00Z"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Bad request due to invalid input",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "type": "string",
+                            "example": "Invalid input data"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "404": {
+                  "description": "Newsletter post not found",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "type": "string",
+                            "example": "Newsletter post not found"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "500": {
+                  "description": "Internal server error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "type": "string",
+                            "example": "Internal server error"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+  
+          "/newsletter/delete/{id}": {
+            "delete": {
+              "summary": "Delete a specific newsletter post by ID",
+              "description": "Deletes an existing newsletter post identified by its ID.",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  },
+                  "description": "ID of the newsletter post to delete"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Newsletter post deleted successfully",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "msg": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "404": {
+                  "description": "Newsletter post not found",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "type": "string",
+                            "example": "Newsletter post not found"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "500": {
+                  "description": "Internal server error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "type": "string",
+                            "example": "Internal server error"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/notablealumni/posts": {
+        "post": {
+          "summary": "Create a new notable alumni post",
+          "description": "Uploads an image and creates a new notable alumni post.",
+          "consumes": ["multipart/form-data"],
+          "parameters": [
+            {
+              "name": "Notable_images",
+              "in": "formData",
+              "required": true,
+              "description": "Image file for the notable alumni post",
+              "type": "file"
+            },
+            {
+              "name": "Notable_name",
+              "in": "formData",
+              "required": true,
+              "description": "Name of the notable alumni",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "Notable_description",
+              "in": "formData",
+              "required": true,
+              "description": "Description of the notable alumni",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "New notable alumni post created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "Notable_images": {
+                            "type": "string"
+                          },
+                          "Notable_name": {
+                            "type": "string"
+                          },
+                          "Notable_description": {
+                            "type": "string"
+                          },
+                          "__v": {
+                            "type": "integer"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request, invalid input",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/notablealumni": {
+        "get": {
+          "summary": "Get all notable alumni posts",
+          "description": "Retrieves a list of all notable alumni posts.",
+          "responses": {
+            "200": {
+              "description": "List of notable alumni posts retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "_id": {
+                              "type": "string"
+                            },
+                            "Notable_images": {
+                              "type": "string"
+                            },
+                            "Notable_name": {
+                              "type": "string"
+                            },
+                            "Notable_description": {
+                              "type": "string"
+                            },
+                            "__v": {
+                              "type": "integer"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/notablealumni/{id}": {
+        "get": {
+          "summary": "Get a single notable alumni post by ID",
+          "description": "Fetches a single notable alumni post based on the provided ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the notable alumni post to retrieve"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Notable alumni post retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string"
+                      },
+                      "Notable_images": {
+                        "type": "string"
+                      },
+                      "Notable_name": {
+                        "type": "string"
+                      },
+                      "Notable_description": {
+                        "type": "string"
+                      },
+                      "__v": {
+                        "type": "integer"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Notable alumni post not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Notable alumni post not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/notablealumni/update/{id}": {
+        "put": {
+          "summary": "Update a specific notable alumni post by ID",
+          "description": "Updates the details of a notable alumni post based on the provided ID. Allows for updating the image as well.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the notable alumni post to update"
+            },
+            {
+              "name": "Notable_images",
+              "in": "formData",
+              "required": false,
+              "type": "file",
+              "description": "Updated image file for the notable alumni post"
+            },
+            {
+              "name": "Notable_name",
+              "in": "formData",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "example": "John Doe"
+              },
+              "description": "Updated name of the notable alumni"
+            },
+            {
+              "name": "Notable_description",
+              "in": "formData",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "example": "John Doe is a distinguished alumnus..."
+              },
+              "description": "Updated description for the notable alumni post"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Notable alumni post updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Notable alumni post updated successfully"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "Notable_images": {
+                            "type": "string"
+                          },
+                          "Notable_name": {
+                            "type": "string"
+                          },
+                          "Notable_description": {
+                            "type": "string"
+                          },
+                          "__v": {
+                            "type": "integer"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "modifiedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request, invalid data or missing fields",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Invalid data or missing fields"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Notable alumni post not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Notable alumni post not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/notablealumni/delete/{id}": {
+        "delete": {
+          "summary": "Delete a specific notable alumni post by ID",
+          "description": "Deletes a notable alumni post based on the provided ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the notable alumni post to delete"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Notable alumni post deleted successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Notable alumni post deleted successfully"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Notable alumni post not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Notable alumni post not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/notablealumnipage/posts": {
+        "post": {
+          "summary": "Create a new notable alumni page post",
+          "description": "Adds a new notable alumni page post with the provided details.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Notable_name": {
+                      "type": "string",
+                      "description": "Name of the notable alumni",
+                      "example": "John Doe"
+                    },
+                    "Notable_designation": {
+                      "type": "string",
+                      "description": "Designation of the notable alumni",
+                      "example": "CEO of Example Corp"
+                    },
+                    "Notable_images": {
+                      "type": "string",
+                      "description": "Image URL of the notable alumni",
+                      "example": "https://example.com/images/john_doe.png"
+                    }
+                  },
+                  "required": ["Notable_name", "Notable_designation"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Notable alumni page post created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Notable alumni page post created successfully"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "64f9b68c8e1d0a3b80baf8c4"
+                          },
+                          "Notable_name": {
+                            "type": "string",
+                            "example": "John Doe"
+                          },
+                          "Notable_designation": {
+                            "type": "string",
+                            "example": "CEO of Example Corp"
+                          },
+                          "Notable_images": {
+                            "type": "string",
+                            "example": "https://example.com/images/john_doe.png"
+                          },
+                          "__v": {
+                            "type": "integer",
+                            "example": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request, invalid input",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Invalid input data"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/notablealumnipage": {
+        "get": {
+          "summary": "Get all notable alumni page posts",
+          "description": "Retrieves a list of all notable alumni page posts.",
+          "responses": {
+            "200": {
+              "description": "Successfully retrieved notable alumni page posts",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Successfully retrieved all notable alumni page posts"
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "_id": {
+                              "type": "string",
+                              "example": "64f9b68c8e1d0a3b80baf8c4"
+                            },
+                            "Notable_name": {
+                              "type": "string",
+                              "example": "John Doe"
+                            },
+                            "Notable_designation": {
+                              "type": "string",
+                              "example": "CEO of Example Corp"
+                            },
+                            "Notable_images": {
+                              "type": "string",
+                              "example": "https://example.com/images/john_doe.png"
+                            },
+                            "__v": {
+                              "type": "integer",
+                              "example": 0
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "An error occurred while retrieving the posts"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/notablealumnipage/update/{id}": {
+        "put": {
+          "summary": "Update a specific notable alumni page post by ID",
+          "description": "Updates an existing notable alumni page post identified by its ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the notable alumni page post to update"
+            },
+            {
+              "name": "Notable_name",
+              "in": "formData",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "example": "Updated Name"
+              },
+              "description": "Updated name of the notable alumni"
+            },
+            {
+              "name": "Notable_designation",
+              "in": "formData",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "example": "Updated Designation"
+              },
+              "description": "Updated designation of the notable alumni"
+            },
+            {
+              "name": "Notable_images",
+              "in": "formData",
+              "required": false,
+              "type": "file",
+              "description": "Updated image file for the notable alumni"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully updated the notable alumni page post",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Notable alumni page post updated successfully"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "64f9b68c8e1d0a3b80baf8c4"
+                          },
+                          "Notable_name": {
+                            "type": "string",
+                            "example": "Updated Name"
+                          },
+                          "Notable_designation": {
+                            "type": "string",
+                            "example": "Updated Designation"
+                          },
+                          "Notable_images": {
+                            "type": "string",
+                            "example": "https://example.com/images/updated_image.png"
+                          },
+                          "__v": {
+                            "type": "integer",
+                            "example": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Post not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Notable alumni page post not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "An error occurred while updating the post"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/notablealumnipage/delete/{id}": {
+        "delete": {
+          "summary": "Delete a specific notable alumni page post by ID",
+          "description": "Deletes a notable alumni page post identified by its ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the notable alumni page post to delete"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully deleted the notable alumni page post",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Notable alumni page post deleted successfully"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Post not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Notable alumni page post not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "An error occurred while deleting the post"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/testimonial/posts": {
+        "post": {
+          "summary": "Create a new testimonial post",
+          "description": "Adds a new testimonial post with an uploaded image.",
+          "consumes": ["multipart/form-data"],
+          "parameters": [
+            {
+              "name": "Testimonial_image",
+              "in": "formData",
+              "required": true,
+              "description": "Image file for the testimonial",
+              "type": "file"
+            },
+            {
+              "name": "Testimonial_text",
+              "in": "formData",
+              "required": true,
+              "description": "Text of the testimonial",
+              "schema": {
+                "type": "string",
+                "example": "This is a fantastic service!"
+              }
+            },
+            {
+              "name": "Testimonial_author",
+              "in": "formData",
+              "required": true,
+              "description": "Author of the testimonial",
+              "schema": {
+                "type": "string",
+                "example": "John Doe"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Testimonial post created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Testimonial post created successfully"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "60b6c1f4f1e1a74c8f4b4c4b"
+                          },
+                          "Testimonial_image": {
+                            "type": "string",
+                            "example": "testimonial_image.png"
+                          },
+                          "Testimonial_text": {
+                            "type": "string",
+                            "example": "This is a fantastic service!"
+                          },
+                          "Testimonial_author": {
+                            "type": "string",
+                            "example": "John Doe"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request, possibly due to missing parameters or invalid data",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Invalid data provided"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "An error occurred while creating the testimonial"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/testimonial": {
+        "get": {
+          "summary": "Get all testimonial posts",
+          "description": "Retrieves a list of all testimonial posts.",
+          "responses": {
+            "200": {
+              "description": "A list of all testimonial posts",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Testimonial posts retrieved successfully"
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "_id": {
+                              "type": "string",
+                              "example": "60b6c1f4f1e1a74c8f4b4c4b"
+                            },
+                            "Testimonial_image": {
+                              "type": "string",
+                              "example": "testimonial_image.png"
+                            },
+                            "Testimonial_text": {
+                              "type": "string",
+                              "example": "This is a fantastic service!"
+                            },
+                            "Testimonial_author": {
+                              "type": "string",
+                              "example": "John Doe"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "An error occurred while retrieving the testimonials"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/testimonial/{id}": {
+        "get": {
+          "summary": "Get a single testimonial post by ID",
+          "description": "Retrieves a single testimonial post by its ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "example": "60b6c1f4f1e1a74c8f4b4c4b"
+              },
+              "description": "ID of the testimonial post to retrieve"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "A single testimonial post",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Testimonial post retrieved successfully"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "60b6c1f4f1e1a74c8f4b4c4b"
+                          },
+                          "Testimonial_image": {
+                            "type": "string",
+                            "example": "testimonial_image.png"
+                          },
+                          "Testimonial_text": {
+                            "type": "string",
+                            "example": "This is a fantastic service!"
+                          },
+                          "Testimonial_author": {
+                            "type": "string",
+                            "example": "John Doe"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Testimonial post not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Testimonial post not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "An error occurred while retrieving the testimonial post"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+      "/testimonial/update/{id}": {
+        "put": {
+          "summary": "Update a specific testimonial post by ID",
+          "description": "Updates a testimonial post identified by the specified ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "example": "60b6c1f4f1e1a74c8f4b4c4b"
+              },
+              "description": "ID of the testimonial post to update"
+            }
+          ],
+          "requestBody": {
+            "required": false,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Testimonial_image": {
+                      "type": "string",
+                      "format": "binary",
+                      "description": "Image file for the testimonial"
+                    },
+                    "Testimonial_text": {
+                      "type": "string",
+                      "description": "Text of the testimonial"
+                    },
+                    "Testimonial_author": {
+                      "type": "string",
+                      "description": "Author of the testimonial"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Testimonial post updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "example": "Testimonial post updated successfully"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "60b6c1f4f1e1a74c8f4b4c4b"
+                          },
+                          "Testimonial_image": {
+                            "type": "string",
+                            "example": "updated_testimonial_image.png"
+                          },
+                          "Testimonial_text": {
+                            "type": "string",
+                            "example": "Updated testimonial text"
+                          },
+                          "Testimonial_author": {
+                            "type": "string",
+                            "example": "Jane Doe"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request, invalid input data",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Invalid input data"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Testimonial post not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Testimonial post not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "An error occurred while updating the testimonial post"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+  
+  
+      
+        "/testimonial/delete/{id}": {
+          "delete": {
+            "summary": "Delete a specific testimonial post by ID",
+            "description": "Deletes a testimonial post identified by the specified ID.",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": "60b6c1f4f1e1a74c8f4b4c4b"
+                },
+                "description": "ID of the testimonial post to delete"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Testimonial post deleted successfully",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "msg": {
+                          "type": "string",
+                          "example": "Testimonial post deleted successfully"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Testimonial post not found",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "string",
+                          "example": "Testimonial post not found"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal server error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "string",
+                          "example": "An error occurred while deleting the testimonial post"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      
+      
+    }
+  }
+  
