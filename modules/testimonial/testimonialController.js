@@ -1,5 +1,5 @@
 // controllers/testimonialController.js
-const { testimonialModel } = require('./testimonialModel');
+const { testimonialModel } = require("./testimonialModel");
 
 // Create a new testimonial
 exports.addTestimonail = async (req, res) => {
@@ -13,10 +13,12 @@ exports.addTestimonail = async (req, res) => {
       Testimonial_image: testimonialFile,
     });
     await Testimonial.save();
-    res.status(200).json({ msg: "Testimonial added successfully", Testimonial });
+    res
+      .status(200)
+      .json({ msg: "Testimonial added successfully", data:Testimonial });
   } catch (error) {
     console.error(error);
-    res.status(400).json({ error: "Couldn't add testimonial", details: error });
+    res.status(400).json({ error: "Couldn't add testimonial",error });
   }
 };
 
@@ -28,22 +30,23 @@ exports.getTestimonail = async (req, res) => {
       // Fetch single testimonial
       const testimonial = await testimonialModel.findById(id);
       if (!testimonial) {
-        return res.status(404).send({ msg: 'Testimonial not found' });
+        return res.status(404).send({ msg: "Testimonial not found" });
       }
-      console.log('Fetched Testimonial:', testimonial); // Log the testimonial data
+
       res.status(200).send(testimonial);
     } else {
       // Fetch all testimonials
       const posts = await testimonialModel.find();
-      console.log('Fetched Testimonials:', posts); // Log all testimonials data
+
       res.status(200).send(posts);
     }
   } catch (error) {
     console.error(error);
-    res.status(400).send({ msg: "Couldn't retrieve testimonials", details: error });
+    res
+      .status(400)
+      .send({ msg: "Couldn't retrieve testimonials", details: error });
   }
 };
-
 
 // Update a testimonial by ID
 exports.updateTestimonail = async (req, res) => {
@@ -55,7 +58,7 @@ exports.updateTestimonail = async (req, res) => {
     // Check if testimonial exists
     const testimonial = await testimonialModel.findById(id);
     if (!testimonial) {
-      return res.status(404).send({ msg: 'Testimonial not found' });
+      return res.status(404).json({ msg: "Testimonial not found" });
     }
 
     // Update testimonial data
@@ -64,11 +67,13 @@ exports.updateTestimonail = async (req, res) => {
       Testimonial_image: testimonialFile || testimonial.Testimonial_image,
     };
 
-    const updatedTestimonial = await testimonialModel.findByIdAndUpdate(id, updatedData, { new: true });
-    res.status(200).send(updatedTestimonial);
+    const data = await testimonialModel.findByIdAndUpdate(id, updatedData, {
+      new: true,
+    });
+    res.status(200).json({ msg: "Testimonial Update Successfuly", data });
   } catch (error) {
     console.error(error);
-    res.status(400).send({ msg: "Couldn't update testimonial", details: error });
+    res.status(400).json({ msg: "Couldn't update testimonial", error: error.message });
   }
 };
 
@@ -79,11 +84,13 @@ exports.deleteTestimonail = async (req, res) => {
   try {
     const deletedPost = await testimonialModel.findByIdAndDelete(id);
     if (!deletedPost) {
-      return res.status(404).send({ msg: 'Testimonial not found' });
+      return res.status(404).send({ msg: "Testimonial not found" });
     }
-    res.status(200).send({ msg: 'Testimonial deleted successfully' });
+    res.status(200).send({ msg: "Testimonial deleted successfully" });
   } catch (error) {
     console.error(error);
-    res.status(400).send({ msg: "Couldn't delete testimonial", details: error });
+    res
+      .status(400)
+      .send({ msg: "Couldn't delete testimonial", details: error });
   }
 };

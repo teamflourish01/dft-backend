@@ -31,7 +31,7 @@ const homeSchema = new mongoose.Schema(
     },
     event_date: [
       {
-        type: Date,
+        type: String,
         required: true,
       },
     ],

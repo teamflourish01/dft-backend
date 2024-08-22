@@ -27,11 +27,11 @@ exports.getNewsletter = async (req, res) => {
       if (!Newsletter) {
         return res.status(404).send({ msg: "newsletter not found" });
       }
-      console.log('fetch newsletter:', Newsletter);
+      
       res.status(200).send(Newsletter);
     } else {
       const posts = await newsletterModel.find();
-      console.log('fetched newsletter:', posts);
+      
       res.status(200).send(posts);
     }
   } catch (error) {

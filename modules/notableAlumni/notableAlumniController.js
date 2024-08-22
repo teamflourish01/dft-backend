@@ -1,4 +1,4 @@
-const { notableAlumniModel } = require('./notableAlumniModel');
+const { notableAlumniModel } = require("./notableAlumniModel");
 
 // Create a new post
 exports.addAlumni = async (req, res) => {
@@ -12,7 +12,9 @@ exports.addAlumni = async (req, res) => {
       Notable_images: notablealumniFile,
     });
     await Notablealumni.save();
-    res.status(200).json({ msg: "notableAlumni added successfully", Notablealumni });
+    res
+      .status(200)
+      .json({ msg: "notableAlumni added successfully", data: Notablealumni });
   } catch (error) {
     console.error(error);
     res.status(400).json({ error: "Couldn't Add notableAlumni", error });
@@ -28,16 +30,18 @@ exports.getAlumni = async (req, res) => {
       if (!notableAlumni) {
         return res.status(404).send({ msg: "notableAlumni not found" });
       }
-      console.log('fetch NotableAlumni:', notableAlumni);
+
       res.status(200).send(notableAlumni);
     } else {
       const posts = await notableAlumniModel.find();
-      console.log('fetched NotableAlumni:', posts);
+
       res.status(200).send(posts);
     }
   } catch (error) {
     console.error(error);
-    res.status(400).send({ msg: "Couldn't Retrieve notableAlumni", details: error });
+    res
+      .status(400)
+      .send({ msg: "Couldn't Retrieve notableAlumni", details: error });
   }
 };
 
@@ -50,15 +54,21 @@ exports.updateAlumni = async (req, res) => {
   try {
     const notableAlumni = await notableAlumniModel.findById(id);
     if (!notableAlumni) {
-      return res.status(404).send({ msg: 'notablealumni not found' });
+      return res.status(404).send({ msg: "notablealumni not found" });
     }
 
     const updateData = {
       ...updates,
       Notable_images: notableAlumniFile || notableAlumni.Notable_images,
     };
-    const updateNotableAlumni = await notableAlumniModel.findByIdAndUpdate(id, updateData, { new: true });
-    res.status(200).send(updateNotableAlumni);
+    const updateNotableAlumni = await notableAlumniModel.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true }
+    );
+    res
+      .status(200)
+      .send({ msg: "Notable Alumni Update Successfuly ", updateNotableAlumni });
   } catch (error) {
     console.error(error);
     res.status(400).send({ msg: "Couldn't Update notableAlumni", error });
@@ -72,11 +82,13 @@ exports.deleteAlumni = async (req, res) => {
   try {
     const deletedPost = await notableAlumniModel.findByIdAndDelete(id);
     if (!deletedPost) {
-      return res.status(404).send({ msg: 'Post not found' });
+      return res.status(404).send({ msg: "Post not found" });
     }
-    res.status(200).send({ msg: 'Post deleted successfully' });
+    res.status(200).send({ msg: "Post deleted successfully" });
   } catch (error) {
     console.error(error);
-    res.status(400).send({ msg: "Couldn't Delete notableAlumni", details: error });
+    res
+      .status(400)
+      .send({ msg: "Couldn't Delete notableAlumni", details: error });
   }
 };
