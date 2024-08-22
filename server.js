@@ -1,4 +1,10 @@
 const express = require("express");
+
+//swagger
+const  sweggerjsdoc =require('swagger-jsdoc');
+const swaggerui =require('swagger-ui-express');
+const  swaggerdocument = require('./swagger.json')
+// /
 const { connection } = require("./db");
 require("dotenv").config();
 const cors = require("cors");
@@ -18,10 +24,23 @@ const UserRouter = require("./modules/user/user.routes");
 
 const app = express(); 
 
+
+
+
+
+
+
+
 // Middleware
 app.use(cors({ origin: true }));
 app.use(express.json());
 app.use(express.static("uploads"));
+
+
+// swagger ui setup
+
+app.use('/api-doc',swaggerui.serve,swaggerui.setup(swaggerdocument));
+
 
 // Routes
 app.use('/',UserRouter)
