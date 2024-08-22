@@ -26,16 +26,16 @@ exports.createContactmail = async (req, res) => {
     const userMailOptions = {
       from: process.env.EMAIL,
       to: email,
-      subject: "Desi Kothi Ice Crem Catalogue",
-      text: "Thank you for your message. Please find the attached catalog.",
+      subject: "DFT Alumni",
+      text: "Thank you for your message.",
       html: "<p>Thank you for your message, <br/><br/>",
     };
 
     const clientMailOptions = {
       from: process.env.EMAIL,
       to: process.env.EMAIL,
-      subject: "New User Mail",
-      text: `This User Catalogue Form submit:\n\nName: ${name}\nEmail: ${email}\nContact Number: ${contactNumber}\nMessage: ${Message}`,
+      subject: "DFT Website Form Fillup User Data",
+      text: `This User Form submit:\n\nName: ${name}\nEmail: ${email}\nContact Number: ${contactNumber}\nMessage: ${Message}`,
     };
 
     // Send emails concurrently

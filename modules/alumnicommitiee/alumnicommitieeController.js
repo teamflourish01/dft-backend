@@ -28,11 +28,11 @@ exports.getAlumnicommitiee = async (req, res) => {
       if (!Commitieealumni) {
         return res.status(404).send({ msg: "Commitieealumni not found" });
       }
-      console.log('fetch Commitieealumni:', Commitieealumni);
+      
       res.status(200).send(Commitieealumni);
     } else {
       const posts = await alumnicommitieeModel.find();
-      console.log('fetched Commitieealumni:', posts);
+      
       res.status(200).send(posts);
     }
   } catch (error) {
@@ -58,10 +58,10 @@ exports.updateAlumnicommitiee = async (req, res) => {
       Commitiee_images: CommitieealumniFile || Commitieealumni.Commitiee_images,
     };
     const updateAlumnicommitiee = await alumnicommitieeModel.findByIdAndUpdate(id, updateData, { new: true });
-    res.status(200).send(updateAlumnicommitiee);
+    res.status(200).send({msg:"Update Alumnicommitiee successfuly",data:updateAlumnicommitiee});
   } catch (error) {
     console.error(error);
-    res.status(400).send({ msg: "Couldn't Update Commitieealumni", error });
+    res.status(400).send({ msg: "Couldn't Update Alumnicommitiee", error });
   }
 };
 

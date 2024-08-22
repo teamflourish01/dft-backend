@@ -27,11 +27,11 @@ exports.getNotablealumnipages = async (req, res) => {
       if (!Notablealumnipages) {
         return res.status(404).send({ msg: "notable alumni pages not found" });
       }
-      console.log('fetch notable alumni pages:', Notablealumnipages);
+      
       res.status(200).send(Notablealumnipages);
     } else {
       const posts = await notableAlumniPagesModel.find();
-      console.log('fetched notable alumni pages:', posts);
+      
       res.status(200).send(posts);
     }
   } catch (error) {
@@ -39,25 +39,6 @@ exports.getNotablealumnipages = async (req, res) => {
     res.status(400).send({ msg: "Couldn't Retrieve notable alumni pages", details: error });
   }
 };
-
-// Update a post by ID
-// exports.updateNotablealumnipages = async (req, res) => {
-//   const { id } = req.params;
-//   const updates = req.body;
-
-//   try {
-//     const updatedPost = await notableAlumniPagesModel.findByIdAndUpdate(id, updates, { new: true });
-//     if (!updatedPost) {
-//       return res.status(404).send({ msg: 'Post not found' });
-//     }
-//     res.status(200).send(updatedPost);
-//   } catch (error) {
-//     res.status(400).send({
-//       msg: "Couldn't update notable alumni page",
-//       error,
-//     });
-//   }
-// };
 exports.updateNotablealumnipages = async (req, res) => {
   const { id } = req.params;
   const updates = req.body;

@@ -20,6 +20,7 @@ const notablealumnipagesrouter = require("./modules/notableAlumniPages/notableAl
 const alumnicommitieerouter = require("./modules/alumnicommitiee/alumnicommitiee.routes")
 const deskfounder = require("./modules/deskfounder/deskfounder.routes");
 const emailtwoRouter = require("./modules/Email/email.routes");
+const UserRouter = require("./modules/user/user.routes");
 
 const app = express(); 
 
@@ -42,6 +43,7 @@ app.use('/api-doc',swaggerui.serve,swaggerui.setup(swaggerdocument));
 
 
 // Routes
+app.use('/',UserRouter)
 app.use('/', Homerouter);
 app.use('/' ,notableAlumnirouter);
 app.use('/' ,testimonialrouter);

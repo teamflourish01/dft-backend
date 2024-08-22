@@ -1,7 +1,13 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
-const { addTestimonail, getTestimonail, updateTestimonail, deleteTestimonail } = require("./testimonialController");
+const {
+  addTestimonail,
+  getTestimonail,
+  updateTestimonail,
+  deleteTestimonail,
+} = require("./testimonialController");
+const SetImgsize = require("../../middleware/imageMiddleware");
 
 const router = express.Router();
 
@@ -20,16 +26,24 @@ const upload = multer({
   //   const filetypes = /jpeg|jpg|png/;
   //   const mimetype = filetypes.test(file.mimetype);
   //   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    
+
   //   if (mimetype && extname) {
   //     return cb(null, true);
   //   }
   //   cb("Error: File upload only supports the following filetypes - " + filetypes);
   // }
 });
+const dimensions = {
+  Testimonial_image: { width: 101, height: 100 },
+};
 
 // Create a new post
-router.post("/testimonial/posts", upload.single("Testimonial_image"), addTestimonail);
+router.post(
+  "/testimonial/posts",
+  upload.single("Testimonial_image"),
+  SetImgsize(dimensions),
+  addTestimonail
+);
 
 // Get all posts
 router.get("/testimonial", getTestimonail);
@@ -38,7 +52,12 @@ router.get("/testimonial", getTestimonail);
 router.get("/testimonial/:id", getTestimonail);
 
 // Update a specific post by ID
-router.put("/testimonial/update/:id", upload.single("Testimonial_image"), updateTestimonail);
+router.put(
+  "/testimonial/update/:id",
+  upload.single("Testimonial_image"),
+  SetImgsize(dimensions),
+  updateTestimonail
+);
 
 // Delete a specific post by ID
 router.delete("/testimonial/delete/:id", deleteTestimonail);

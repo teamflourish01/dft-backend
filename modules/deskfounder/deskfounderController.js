@@ -33,11 +33,11 @@ exports.getDeskfounder = async (req, res) => {
       if (!Deskfounder) {
         return res.status(404).send({ msg: "deskfounder not found" });
       }
-      console.log('fetch deskfounder:', Deskfounder);
+      
       res.status(200).send(Deskfounder);
     } else {
       const posts = await deskfounderModel.find();
-      console.log('fetched deskfounder:', posts);
+      
       res.status(200).send(posts);
     }
   } catch (error) {

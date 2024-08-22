@@ -1,7 +1,13 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
-const { addAlumni, getAlumni, updateAlumni, deleteAlumni } = require("./notableAlumniController");
+const {
+  addAlumni,
+  getAlumni,
+  updateAlumni,
+  deleteAlumni,
+} = require("./notableAlumniController");
+const SetImgsize = require("../../middleware/imageMiddleware");
 
 const router = express.Router();
 
@@ -18,8 +24,17 @@ const upload = multer({
   storage: storage,
 });
 
+const dimensions = {
+  Notable_images: { width: 123, height: 123 },
+};
+
 // Create a new post
-router.post("/notablealumni/posts", upload.single("Notable_images"), addAlumni);
+router.post(
+  "/notablealumni/posts",
+  upload.single("Notable_images"),
+  SetImgsize(dimensions),
+  addAlumni
+);
 
 // Get all posts
 router.get("/notablealumni", getAlumni);
@@ -28,7 +43,12 @@ router.get("/notablealumni", getAlumni);
 router.get("/notablealumni/:id", getAlumni);
 
 // Update a specific post by ID
-router.put("/notablealumni/update/:id", upload.single("Notable_images"), updateAlumni);
+router.put(
+  "/notablealumni/update/:id",
+  upload.single("Notable_images"),
+  SetImgsize(dimensions),
+  updateAlumni
+);
 
 // Delete a specific post by ID
 router.delete("/notablealumni/delete/:id", deleteAlumni);
