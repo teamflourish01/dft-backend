@@ -44,14 +44,14 @@ exports.createContactmail = async (req, res) => {
       transporter.sendMail(clientMailOptions),
     ]);
 
-    // //save Data to DB
-    // const newEmail = new emailModel({
-    //   name,
-    //   email,
-    //   contactNumber,
-    //   Message,
-    // });
-    // await newEmail.save();
+    //save Data to DB
+    const newEmail = new emailModel({
+      name,
+      email,
+      contactNumber,
+      Message,
+    });
+    await newEmail.save();
 
     res.status(200).send("Emails sent successfully");
   } catch (error) {
