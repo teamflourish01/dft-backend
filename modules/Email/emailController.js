@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 const fs = require("fs");
+const { emailModel } = require("./emailModel");
 
 // Use connection pooling for better performance
 let transporter = nodemailer.createTransport({
@@ -21,8 +22,7 @@ exports.createContactmail = async (req, res) => {
     return res.status(400).send("All fields are required");
   }
 
-  try {  
-
+  try {
     const userMailOptions = {
       from: process.env.EMAIL,
       to: email,
@@ -44,8 +44,61 @@ exports.createContactmail = async (req, res) => {
       transporter.sendMail(clientMailOptions),
     ]);
 
+    // //save Data to DB
+    // const newEmail = new emailModel({
+    //   name,
+    //   email,
+    //   contactNumber,
+    //   Message,
+    // });
+    // await newEmail.save();
+
     res.status(200).send("Emails sent successfully");
   } catch (error) {
     res.status(500).send("Error sending emails: " + error.toString());
+  }
+};
+
+exports.getEmail = async (req, res) => {
+  let { page, search } = req.query;
+  let query = {};
+  let data, total;
+  try {
+    if (search) {
+      query.name = { $regex: `^${search}`, $options: `i` };
+      data = await emailModel.find(query);
+      total = data.length;
+    } else {
+      total = await emailModel.countDocuments(query);
+      data = await emailModel
+        .find(query)
+        .skip((page - 1) * 12)
+        .limit(12);
+    }
+    res.status(200).send({
+      data,
+      count: total,
+      msg: "User found with pagination successfully",
+    });
+  } catch (error) {
+    res.status(400).send({
+      error,
+      msg: error.message,
+    });
+  }
+};
+exports.deleteEmail = async (req, res) => {
+  let { id } = req.params;
+  try {
+    let data = await emailModel.findByIdAndDelete(id);
+    res.status(200).send({
+      data,
+      msg: "Inquiry Removed Sucessfully",
+    });
+  } catch (error) {
+    res.status(400).send({
+      error,
+      msg: error.message,
+    });
   }
 };

@@ -4,7 +4,7 @@ const express = require("express");
 const  sweggerjsdoc =require('swagger-jsdoc');
 const swaggerui =require('swagger-ui-express');
 const  swaggerdocument = require('./swagger.json')
-// /
+
 const { connection } = require("./db");
 require("dotenv").config();
 const cors = require("cors");

@@ -6,23 +6,24 @@ const options = {
     updatedAt: "modifiedAt",
   },
 };
-const deskfounderSchema = new mongoose.Schema(
+const emailSchema = new mongoose.Schema(
   {
-    Deskfounder_images: {
+    name: {
       type: String,
     },
-    author_name: {
+    email: {
       type: String,
-      // required: true,
     },
-
-    description: {
+    contactNumber: {
+      type: String,
+    },
+    Message: {
       type: String,
     },
   },
   options
 );
 
-const deskfounderModel = mongoose.model("deskfounder", deskfounderSchema);
+const emailModel = mongoose.model("email", emailSchema);
 
-module.exports = { deskfounderModel };
+module.exports = { emailModel };
