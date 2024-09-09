@@ -9,6 +9,7 @@ const options = {
 
 const gallerySchema = new mongoose.Schema(
   {
+    gallary_link:{type:String},
     Gallery_images: {
       type: Array,
       required: true,

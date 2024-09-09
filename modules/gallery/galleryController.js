@@ -3,11 +3,13 @@ const { galleryModel } = require("./galleryModel");
 // Create a new post
 exports.addGallery = async (req, res) => {
   try {
+    const {gallary_link}=req.body
     const galleryFiles = req.files
       ? req.files.map((file) => file.filename)
       : [];
 
     const gallery = new galleryModel({
+      gallary_link,
       Gallery_images: galleryFiles,
     });
     await gallery.save();

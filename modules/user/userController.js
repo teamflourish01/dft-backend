@@ -7,7 +7,7 @@ exports.addUser = async (req, res) => {
   if (req.file) {
     dup.image = req.file.filename;
   }
-  console.log("images files", req.file);
+  
 
   // console.log(dup, "dup");
   try {
