@@ -25,7 +25,7 @@ const upload = multer({
 });
 
 const dimensions = {
-  Notable_images: { width: 123, height: 123 },
+  Notable_images: { width: 126, height: 126 },
 };
 
 // Create a new post
